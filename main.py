@@ -3,6 +3,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 from bs4 import BeautifulSoup
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 print('Логин')
@@ -15,9 +17,7 @@ count = 0
 
 print('Start')
 options = webdriver.ChromeOptions()
-options.add_experimental_option('excludeSwitches', ['enable-logging'])
-options.headless=True
-driver=webdriver.Chrome(executable_path="chromedriver.exe",options=options)
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=options)
 driver.implicitly_wait(10)
 driver.get("https://vk.com/login")
 driver.find_element(by=By.CLASS_NAME, value="FlatButton__in").click()
